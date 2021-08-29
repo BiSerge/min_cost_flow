@@ -16,22 +16,23 @@ namespace min_cost_flow
             do
             {
                 Console.Write("Write _chips sequence of values separated by _chips space, <Enter> - is completed: ");
+                
                 int[] _chips = Console.ReadLine().Split().Select(int.Parse).ToArray();
                 int _numberChips = _equalChips = _chips.Length;
-                int[] b = new int[_numberChips + 1];
+                int[] _fiboChips = new int[_numberChips + 1];
 
                 Array.Sort(_chips);
 
-                b[0] = 0;
+                _fiboChips[0] = 0;
                 for (int i = 0; i < _numberChips; i++)
                 {
-                    b[i + 1] = b[i] + _chips[i];
+                    _fiboChips[i + 1] = _fiboChips[i] + _chips[i];
                 }
 
                 for (int i = 0, j = 0; i < _numberChips; i = j) { 
                     for (; j < _numberChips && _chips[i] == _chips[j]; j++) ;
 
-                    int _equalElements = j - i, x = _chips[i], _minActions = 1 * i * (x - 1) - b[i], _maxActions = b[_numberChips] - b[j] - (_numberChips - j) * (x + 1);
+                    int _equalElements = j - i, x = _chips[i], _minActions = 1 * i * (x - 1) - _fiboChips[i], _maxActions = _fiboChips[_numberChips] - _fiboChips[j] - (_numberChips - j) * (x + 1);
 
                     if (_equalElements >= _equalChips)
                     {
