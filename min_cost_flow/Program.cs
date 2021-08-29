@@ -10,45 +10,45 @@ namespace min_cost_flow
     {
         static void Main(string[] args)
         {
-            int k = 0;  
-            int minn = 99999;
+            int _equalChips = 0;  
+            int _minMoves = 99999;
 
             do
             {
-                Console.Write("Write a sequence of values separated by a space, <Enter> - is completed: ");
-                int[] a = Console.ReadLine().Split().Select(int.Parse).ToArray();
-                int n = k = a.Length;
-                int[] b = new int[n + 1];
+                Console.Write("Write _chips sequence of values separated by _chips space, <Enter> - is completed: ");
+                int[] _chips = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                int _numberChips = _equalChips = _chips.Length;
+                int[] b = new int[_numberChips + 1];
 
-                Array.Sort(a);
+                Array.Sort(_chips);
 
                 b[0] = 0;
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < _numberChips; i++)
                 {
-                    b[i + 1] = b[i] + a[i];
+                    b[i + 1] = b[i] + _chips[i];
                 }
 
-                for (int i = 0, j = 0; i < n; i = j) { 
-                    for (; j < n && a[i] == a[j]; j++) ;
+                for (int i = 0, j = 0; i < _numberChips; i = j) { 
+                    for (; j < _numberChips && _chips[i] == _chips[j]; j++) ;
 
-                    int col = j - i, x = a[i], cl = 1 * i * (x - 1) - b[i], cr = b[n] - b[j] - (n - j) * (x + 1);
+                    int _equalElements = j - i, x = _chips[i], _minActions = 1 * i * (x - 1) - b[i], _maxActions = b[_numberChips] - b[j] - (_numberChips - j) * (x + 1);
 
-                    if (col >= k)
+                    if (_equalElements >= _equalChips)
                     {
-                        minn = 0;
+                        _minMoves = 0;
                         break;
                     }
 
-                    if (col + i >= k)
-                        minn = Math.Min(minn, cl + k - col);
+                    if (_equalElements + i >= _equalChips)
+                        _minMoves = Math.Min(_minMoves, _minActions + _equalChips - _equalElements);
 
-                    if (col + n - j >= k)
-                        minn = Math.Min(minn, cr + k - col);
+                    if (_equalElements + _numberChips - j >= _equalChips)
+                        _minMoves = Math.Min(_minMoves, _maxActions + _equalChips - _equalElements);
 
-                    minn = Math.Min(minn, cl + cr + k - col - 1);
+                    _minMoves = Math.Min(_minMoves, _minActions + _maxActions + _equalChips - _equalElements - 1);
                 }
 
-                Console.WriteLine($"The minimum number of chip moves: {minn}");
+                Console.WriteLine($"The minimum number of chip moves: {_minMoves}");
                 Console.Write("Press <Escape> to exit or Press <Enter> to continue... ");
                 Console.WriteLine();
 
